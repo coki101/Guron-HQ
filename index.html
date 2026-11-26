@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#041316"><title>GURON · Detective HQ</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="cases.css"><script defer src="cases.js"></script><link rel="stylesheet" href="lab.css"><script defer src="lab.js"></script><link rel="stylesheet" href="vault.css"><script defer src="staking.js"></script><script defer src="vault.js"></script><link rel="stylesheet" href="launch.css"><script defer src="pump.js"></script><script defer src="launch.js"></script><script defer src="app.js"></script></head>
+<body><aside><a href="#home" class="brand"><img src="assets/brand.jpg" alt="Guron — The Guru Hunter"></a><nav aria-label="Headquarters"></nav><img class="office" src="assets/office.jpg" alt="Guron HQ Detective Office"></aside>
+<main id="home"><header><b><i>≋</i> Solana</b><b>$GURON</b><span>Detective HQ</span><a href="https://pump.fun/" target="_blank" rel="noopener">Explore Pump.fun ↗</a></header>
+<section class="hero"><div class="copy"><strong>// DETECTIVE HQ</strong><h1>GURUS TALK.<br><em>GURON CHECKS.</em></h1><p>A memecoin for a market full of predictions, screenshots and excuses.<br>Here, we follow the wallet, not the words.</p><div class="actions"><a class="btn" href="#case-files">Open case files →</a><a class="secondary" href="#meet">▷ Meet Guron</a></div></div></section>
+<div class="content"><div class="tiles"></div><div class="bottom"><article class="featured"><img src="assets/guru.jpg" alt="The 100X Guru wearing yellow shades"><div><small>FEATURED CASE</small><strong> CASE #001</strong><h2>The 100X Guru</h2><p>He buys every bottom, calls every top and never shows the wallet.</p><a class="btn" href="#case-files">View case →</a></div></article><article class="intel"><div><strong>// GURON AI</strong><h2>Ask the detective</h2><p>Explore the questions behind a wallet, a claim or a suspicious trade.</p><a class="secondary" href="#guron-ai">Open briefing →</a></div></article></div></div><section id="cases" hidden aria-labelledby="case-heading">
+<div class="archive-banner"><h1 id="case-heading">// CASE <em>FILES</em></h1><p>Investigations into crypto gurus, insider moves<br>and suspicious stories.</p></div>
+<div class="archive"><div class="tools"><div id="filters" aria-label="Filter by case status"></div><input type="search" id="search" aria-label="Search case files" placeholder="Search case…"></div>
+<div class="desk"><section aria-label="Case list"><div id="records"></div><p id="empty" hidden>No cases match this search. <button id="reset">Clear filters</button></p></section><section id="dossier" aria-label="Selected case" aria-live="polite"></section></div></div>
+</section><section id="lab" hidden aria-labelledby="lab-heading">
+<div class="lab-banner"><h1 id="lab-heading">// THE <em>LAB</em></h1><p>Trace a wallet. Inspect the evidence.</p></div>
+<div class="lab-body"><form id="wallet-form"><label for="wallet">Investigate a wallet</label><input id="wallet" placeholder="Enter a Solana address" required maxlength="44" spellcheck="false" autocomplete="off"><button>Sniff the chain →</button></form>
+<div class="lab-controls"><button id="sample">Open sample case</button><label>Watchlist <select id="watch"><option value="">Select a wallet</option></select></label></div>
+<p id="lab-status" role="status"></p><div id="lab-results"><div class="lab-title"><div><strong id="lab-source"></strong><h2>Wallet investigation</h2><code id="account"></code></div><button id="bookmark" hidden>Add to watchlist</button></div>
+<div class="lab-metrics"><article><strong>SOL balance</strong><h2 id="balance"></h2></article><article><strong>Transactions reviewed</strong><h2 id="reviewed"></h2></article><article><strong>Failed in sample</strong><h2 id="failed"></h2></article></div>
+<article class="ledger"><strong>Recent activity</strong><table><thead><tr><th>Time (UTC)</th><th>Outcome</th><th>Transaction</th></tr></thead><tbody id="activity"></tbody></table></article></div></div></section><section id="vault" aria-labelledby="vault-heading" hidden>
+<div class="vault-banner"><strong>Detective HQ · Simulation</strong><h1 id="vault-heading">// <em>STAKING</em></h1><p>Explore the vault with practice tokens.</p></div>
+<div class="vault-body"><article id="chain-vault"><strong>Solana devnet</strong><h2>On-chain vault</h2><p id="chain-info">Pool configuration pending.</p><button id="chain-connect">Inspect vault with Phantom</button><form id="chain-form" hidden><label>Whole GURON tokens <input id="chain-amount" required type="number" min="1000" step="1" value="1000"></label><button>Stake for 30 days</button></form><button id="chain-redeem" hidden>Redeem principal and reward</button><p id="chain-message" role="status"></p></article><h2>Practice vault</h2><div class="vault-stats"><article><strong>Available</strong><h2 id="v-cash"></h2></article><article><strong>My staked</strong><h2 id="v-staked"></h2></article><article><strong>Claimable rewards</strong><h2 id="v-rewards"></h2></article></div>
+<div class="vault-grid"><article><h2>Stake $GURON</h2><form id="v-form"><label for="v-amount">Practice tokens per position</label><div class="amount-row"><input type="number" id="v-amount" required min="1000" step="1" value="10000"><button type="button" id="v-max">Max</button></div><p id="v-estimate"></p><button class="vault-action">Stake practice tokens</button></form></article>
+<article><h2>Staking tiers</h2><div class="tier-list" id="v-tiers"></div><p>Each deposit earns at its opening tier for 30 simulated days.</p></article>
+<article><h2>Simulation clock</h2><strong id="v-day"></strong><p>Advance the clock to accrue rewards and unlock positions.</p><button id="v-advance">Advance 30 days →</button></article></div>
+<article><div class="position-head"><h2>My positions</h2><button id="v-claim">Claim rewards</button></div><div id="v-positions"></div></article><p id="v-status" role="status"></p></div></section><section id="launch" hidden aria-labelledby="launch-title">
+<div class="launch-banner"><h1 id="launch-title">// LAUNCH <em>TOKEN</em></h1><p>Prepare your token artwork and Solana launch draft.</p></div>
+<form id="launch-form"><article><h2>Create your token</h2>
+<label>Token name<input name="name" required maxlength="32" value="GURON"></label>
+<label>Ticker symbol<input name="symbol" required pattern="[A-Za-z0-9]{1,10}" maxlength="10" value="GURON"></label>
+<label>Description<textarea name="description" required maxlength="200" rows="3">The Crypto Guru Hunter. Investigations and on-chain stories.</textarea></label>
+<label>Token logo · PNG, JPEG or WebP, up to 2 MB<input type="file" name="logo" accept="image/png,image/jpeg,image/webp"></label></article>
+<article><h2>Launch settings</h2><label>Launch route<select name="route"><option>Standard</option><option selected>Pump.fun</option></select></label>
+<fieldset id="standard-settings"><label>Planned supply<input name="supply" type="number" min="1" max="1000000000000" step="1" value="1000000000" required></label>
+<label>Planned liquidity (SOL)<input name="liquidity" type="number" min="0" step="0.000000001" value="10" required></label></fieldset>
+<p id="pump-note" hidden>Create on Pump.fun from GURON. Solana mainnet · No initial buy. Network fees and account rent apply.</p>
+<label>Project website (optional)<input type="url" name="website" placeholder="https://"></label></article>
+<article class="token-preview"><strong>Live preview</strong><div class="token-art"><img id="token-logo" src="assets/brand.jpg" alt="Token logo preview"></div><h2 id="token-name"></h2><b id="token-symbol"></b><p id="token-description"></p><small id="token-settings"></small><button class="btn">Review draft →</button></article></form>
+<article id="launch-review" hidden tabindex="-1"><h2>Launch review</h2><p id="launch-summary"></p><button id="download-draft" class="btn">Export JSON</button> <button id="pump-open" class="btn" hidden>Connect &amp; simulate launch</button></article>
+<div id="pump-receipt" aria-live="polite"></div><p id="launch-status" role="status"></p></section></main>
+<dialog aria-labelledby="title"><button aria-label="Close briefing" autofocus>×</button><img id="art" alt=""><div class="brief"><strong id="label"></strong><h2 id="title"></h2><p id="detail"></p></div></dialog></body></html>
+
+
+
+
+
+
+
