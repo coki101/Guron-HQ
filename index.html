@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#041316"><title>GURON · Detective HQ</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="cases.css"><script defer src="cases.js"></script><link rel="stylesheet" href="lab.css"><script defer src="lab.js"></script><link rel="stylesheet" href="vault.css"><script defer src="staking.js"></script><script defer src="vault.js"></script><link rel="stylesheet" href="launch.css"><script defer src="pump.js"></script><script defer src="launch.js"></script><script defer src="app.js"></script></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#041316"><title>GURON · Detective HQ</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="cases.css"><script defer src="cases.js"></script><link rel="stylesheet" href="lab.css"><script defer src="lab.js"></script><link rel="stylesheet" href="vault.css"><script defer src="staking.js"></script><script defer src="vault.js"></script><script defer src="app.js"></script></head>
 <body><aside><a href="#home" class="brand"><img src="assets/brand.jpg" alt="Guron — The Guru Hunter"></a><nav aria-label="Headquarters"></nav><img class="office" src="assets/office.jpg" alt="Guron HQ Detective Office"></aside>
 <main id="home"><header><b><i>≋</i> Solana</b><b>$GURON</b><span>Detective HQ</span><button id="hq-connect" class="btn" style="margin-left:auto;cursor:pointer;border:0">Connect wallet</button><button id="hq-disconnect" class="secondary" hidden>Disconnect</button></header><p id="hq-wallet-status" role="status" hidden style="margin:8px 3vw"></p>
 <section class="hero"><div class="copy"><strong>// DETECTIVE HQ</strong><h1>GURUS TALK.<br><em>GURON CHECKS.</em></h1><p>A memecoin for a market full of predictions, screenshots and excuses.<br>Here, we follow the wallet, not the words.</p><div class="actions"><a class="btn" href="#case-files">Open case files →</a><a class="secondary" href="#meet">▷ Meet Guron</a></div></div></section>
@@ -19,21 +19,7 @@
 <div class="vault-grid"><article><h2>Stake $GURON</h2><form id="v-form"><label for="v-amount">Practice tokens per position</label><div class="amount-row"><input type="number" id="v-amount" required min="1000" step="1" value="10000"><button type="button" id="v-max">Max</button></div><p id="v-estimate"></p><button class="vault-action">Stake practice tokens</button></form></article>
 <article><h2>Staking tiers</h2><div class="tier-list" id="v-tiers"></div><p>Each deposit earns at its opening tier for 30 simulated days.</p></article>
 <article><h2>Simulation clock</h2><strong id="v-day"></strong><p>Advance the clock to accrue rewards and unlock positions.</p><button id="v-advance">Advance 30 days →</button></article></div>
-<article><div class="position-head"><h2>My positions</h2><button id="v-claim">Claim rewards</button></div><div id="v-positions"></div></article><p id="v-status" role="status"></p></div></section><section id="launch" hidden aria-labelledby="launch-title">
-<div class="launch-banner"><h1 id="launch-title">// LAUNCH <em>TOKEN</em></h1><p>Prepare your token artwork and Solana launch draft.</p></div>
-<form id="launch-form"><article><h2>Create your token</h2>
-<label>Token name<input name="name" required maxlength="32" value="GURON"></label>
-<label>Ticker symbol<input name="symbol" required pattern="[A-Za-z0-9]{1,10}" maxlength="10" value="GURON"></label>
-<label>Description<textarea name="description" required maxlength="200" rows="3">The Crypto Guru Hunter. Investigations and on-chain stories.</textarea></label>
-<label>Token logo · PNG, JPEG or WebP, up to 2 MB<input type="file" name="logo" accept="image/png,image/jpeg,image/webp"></label></article>
-<article><h2>Launch settings</h2><label>Launch route<select name="route"><option>Standard</option><option selected>Pump.fun</option></select></label>
-<fieldset id="standard-settings"><label>Planned supply<input name="supply" type="number" min="1" max="1000000000000" step="1" value="1000000000" required></label>
-<label>Planned liquidity (SOL)<input name="liquidity" type="number" min="0" step="0.000000001" value="10" required></label></fieldset>
-<p id="pump-note" hidden>Create on Pump.fun from GURON. Solana mainnet · No initial buy. Network fees and account rent apply.</p>
-<label>Project website (optional)<input type="url" name="website" placeholder="https://"></label></article>
-<article class="token-preview"><strong>Live preview</strong><div class="token-art"><img id="token-logo" src="assets/brand.jpg" alt="Token logo preview"></div><h2 id="token-name"></h2><b id="token-symbol"></b><p id="token-description"></p><small id="token-settings"></small><button class="btn">Review draft →</button></article></form>
-<article id="launch-review" hidden tabindex="-1"><h2>Launch review</h2><p id="launch-summary"></p><button id="download-draft" class="btn">Export JSON</button> <button id="pump-open" class="btn" hidden>Connect &amp; simulate launch</button></article>
-<div id="pump-receipt" aria-live="polite"></div><p id="launch-status" role="status"></p></section></main>
+<article><div class="position-head"><h2>My positions</h2><button id="v-claim">Claim rewards</button></div><div id="v-positions"></div></article><p id="v-status" role="status"></p></div></section></main>
 <dialog aria-labelledby="title"><button aria-label="Close briefing" autofocus>×</button><img id="art" alt=""><div class="brief"><strong id="label"></strong><h2 id="title"></h2><p id="detail"></p></div></dialog></body></html>
 
 

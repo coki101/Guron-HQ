@@ -3,7 +3,6 @@ const sections = [
   {id:'case-files', name:'Case Files', icon:'▤', short:'Investigations & evidence', art:'guru', label:'CASE #001 · FICTIONAL DOSSIER', title:'The 100X Guru', detail:'The claim: “I bought the bottom. Easy 100x.” The screenshot shows a price, but leaves out the wallet and transaction signature. Guron’s verdict: the entry remains unverified.'},
   {id:'the-lab', name:'The Lab', icon:'⚗', short:'Wallets & transactions', art:'lab', detail:'Follow a wallet through its transfers, holdings and connected addresses. Wallet lookup is planned for the Lab release.'},
   {id:'staking', name:'Staking', icon:'◎', short:'Explore the vault', art:'staking', detail:'The vault will bring staking positions and reward information into HQ. Deposits and rewards are unavailable in this preview.'},
-  {id:'launch-token', name:'Launch Token', icon:'↗', short:'Token launch studio', art:'launch', detail:'Preview the launch studio for Solana projects. Token configuration, supply and launch review are planned for a later release.'},
   {id:'guron-ai', name:'Guron AI', icon:'✧', short:'Detective briefings', art:'ai', detail:'Start an investigation with three questions. Which wallet made the trade? When did it enter? Does the transaction support the public claim? The interactive assistant is planned for a later release.'}
 ];
 const meet = {id:'meet', name:'Meet Guron', art:'hero', label:'DETECTIVE PROFILE', detail:'Guron is a ferret detective with a nose for suspicious calls. In his office, every screenshot starts a case. A wallet, a timestamp and a transaction tell him whether the story holds up.'};
@@ -28,17 +27,15 @@ function renderRoute() {
     if (link.hash === '#'+active.id) link.setAttribute('aria-current','page');
     else link.removeAttribute('aria-current');
   }
-  const isLaunch = active.id === 'launch-token';
-  document.querySelector('#launch').hidden = !isLaunch;
   const isVault = active.id === 'staking';
   document.querySelector('#vault').hidden = !isVault;
   const isArchive = active.id === 'case-files';
   const isLab = active.id === 'the-lab';
   document.querySelector('#lab').hidden = !isLab;
   document.querySelector('#cases').hidden = !isArchive;
-  document.querySelector('.hero').hidden = isArchive || isLab || isVault || isLaunch;
-  document.querySelector('.content').hidden = isArchive || isLab || isVault || isLaunch;
-  if (isLab || isVault || isLaunch) { if(dialog.open) dialog.close(); return; }
+  document.querySelector('.hero').hidden = isArchive || isLab || isVault;
+  document.querySelector('.content').hidden = isArchive || isLab || isVault;
+  if (isLab || isVault) { if(dialog.open) dialog.close(); return; }
   if (isArchive) {
     if (dialog.open) dialog.close();
     renderArchive();
