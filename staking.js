@@ -5,6 +5,34 @@
   const meta = (pubkey,isWritable=false,isSigner=false)=>({pubkey,isWritable,isSigner});
   let ctx;
   let busy=false;
+  const headerButton=document.getElementById('hq-connect');
+  const disconnect=document.getElementById('hq-disconnect');
+  const notice=document.getElementById('hq-wallet-status');
+  let provider, account;
+  function walletStatus(text){
+    if(notice){notice.textContent=text;notice.hidden=!text;}
+  }
+  function syncAccount(key){
+    const address=key?.toString() || '';
+    if(address!==account){clearActions();message('');}
+    account=address;
+    if(headerButton)headerButton.textContent=address ? address.slice(0,4)+'…'+address.slice(-4) : 'Connect wallet';
+    if(disconnect)disconnect.hidden=!address;
+    get('connect').textContent=address ? 'Refresh staking position' : 'Connect wallet for staking';
+    walletStatus('');
+  }
+  async function connect(){
+    const injected=window.phantom?.solana || (window.solana?.isPhantom && window.solana);
+    if(!injected)throw Error('Enable the Phantom extension, or open GURON in the Phantom mobile browser.');
+    if(provider!==injected){
+      provider=injected;
+      provider.on?.('accountChanged',syncAccount);
+      provider.on?.('disconnect',()=>syncAccount(null));
+    }
+    const user=provider.isConnected && provider.publicKey ? provider.publicKey : (await provider.connect()).publicKey;
+    syncAccount(user);
+    return {wallet:provider,user};
+  }
   async function loadSdk() {
     if(window.solanaWeb3)return window.solanaWeb3;
     await new Promise((resolve,reject)=>{
@@ -22,12 +50,10 @@
   async function inspect(){
     clearActions();
     if(location.protocol==='file:')throw Error('Open GURON through its local server to use devnet.');
+    const {wallet,user}=await connect();
     const config=await (await fetch('staking-config.json',{cache:'no-store'})).json();
     if(!config.program||!config.securityWallet||!config.mint)throw Error('Devnet pool setup pending. The practice vault is available below.');
     const w=await loadSdk();
-    const wallet=window.phantom?.solana;
-    if(!wallet)throw Error('Enable Phantom and select Solana devnet.');
-    const {publicKey:user}=await wallet.connect();
     const rpc=new w.Connection(w.clusterApiUrl('devnet'),'confirmed');
     const pk=value=>new w.PublicKey(value);
     const program=pk(config.program), mint=pk(config.mint), admin=pk(config.securityWallet);
@@ -42,6 +68,7 @@
     const accounts=await rpc.getTokenAccountsByOwner(user,{mint});
     const owned=accounts.value.map(item=>({key:item.pubkey,amount:new DataView(Uint8Array.from(item.account.data).buffer).getBigUint64(64,true)})).sort((a,b)=>a.amount>b.amount?-1:a.amount<b.amount?1:0);
     if(!owned.length)throw Error('Create a token account for this mint in your devnet wallet.');
+    if(account!==user.toString())throw Error("Wallet changed. Refresh your staking position.");
     ctx={w,user,wallet,rpc,program,pool,mint,vault,position,tokenProgram:mintInfo.owner,owned,decimals};
     if(pos){
       const data=new DataView(Uint8Array.from(pos.data).buffer);
@@ -80,9 +107,15 @@
     if(busy)return;
     busy=true;
     get('connect').disabled=true;get('form').inert=true;get('redeem').disabled=true;
-    try{await action();}catch(error){message(error.message);}
+    try{await action();}catch(error){const text=error.code===4001?'Wallet request cancelled.':error.message;message(text);walletStatus(text);}
     finally{busy=false;get('connect').disabled=false;get('form').inert=false;get('redeem').disabled=false;}
   }
+  if(headerButton)headerButton.onclick=()=>run(async()=>{
+    await connect();
+    location.hash='staking';
+    await inspect();
+  });
+  if(disconnect)disconnect.onclick=()=>run(async()=>{await provider.disconnect();syncAccount(null);});
   get('connect').onclick=()=>run(inspect);
   get('form').onsubmit=e=>{e.preventDefault();run(()=>transact('stake'));};
   get('redeem').onclick=()=>run(()=>transact('redeem'));
