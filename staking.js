@@ -73,7 +73,9 @@
     if(pos){
       const data=new DataView(Uint8Array.from(pos.data).buffer);
       const unlock=Number(data.getBigInt64(24,true));
-      message('Position matures '+new Date(unlock*1000).toISOString()+'. Principal and reward are paid together.');
+      const units=value=>{const digits=value.toString().padStart(decimals+1,'0');return decimals?digits.slice(0,-decimals)+(('.'+digits.slice(-decimals)).replace(/0+$/,'').replace(/\.$/,'')):digits;};
+      const principal=data.getBigUint64(8,true), due=data.getBigUint64(16,true);
+      message('Principal: '+units(principal)+' GURON · Reward: '+units(due-principal)+' GURON · Unlocks '+new Date(unlock*1000).toLocaleString());
       get('redeem').hidden=false;
     }else{
       get('form').hidden=Boolean(view.getUint8(86));
@@ -113,6 +115,7 @@
   if(headerButton)headerButton.onclick=()=>run(async()=>{
     await connect();
     location.hash='staking';
+    document.dispatchEvent(new Event('guron:open-wallet-vault'));
     await inspect();
   });
   if(disconnect)disconnect.onclick=()=>run(async()=>{await provider.disconnect();syncAccount(null);});
